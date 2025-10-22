@@ -1,0 +1,28 @@
+<div class="home-container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Loan App</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a routerLink="/home/profile" routerLinkActive="active">Profile</a></li>
+        <li><a routerLink="/home/loan-details" routerLinkActive="active">Loan Details</a></li>
+        <!-- Add more menu items here -->
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-title">
+        <h1>Dashboard</h1>
+        <p>Welcome to the Loan Management System!</p>
+      </div>
+      <div class="header-user-profile">
+        <span class="user-name">John Doe</span>
+        <button class="logout-button" (click)="logout()">Logout</button>
+      </div>
+    </header>
+    <router-outlet></router-outlet> <!-- For nested routes like /home/profile -->
+  </main>
+</div>

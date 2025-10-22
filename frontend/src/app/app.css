@@ -1,0 +1,23 @@
+/* Styles for the root application header */
+.app-header {
+  background: linear-gradient(to right, #2c3e50, #34495e); /* Dark, professional gradient */
+  color: #ecf0f1; /* Light grey for text, good contrast */
+  padding: 1.2rem 2.5rem; /* Slightly more padding for a substantial feel */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow for depth */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title horizontally */
+  width: 100%; /* Ensure it spans the full width */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  border-bottom: 3px solid #4CAF50; /* A subtle accent line, matching sidebar highlight */
+}
+
+.app-header h1 {
+  margin: 0; /* Remove default margin from h1 */
+  font-size: 2.2rem; /* Slightly larger font for prominence */
+  font-weight: 600; /* Bolder font weight */
+  letter-spacing: 0.08em; /* More letter spacing for a clean, modern look */
+  text-transform: uppercase; /* Make it uppercase for a strong title */
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
+}
