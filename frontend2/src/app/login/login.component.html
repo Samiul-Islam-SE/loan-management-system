@@ -1,0 +1,20 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+    <p>Welcome back! Please enter your credentials.</p>
+
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input id="username" type="text" [(ngModel)]="credentials.username" placeholder="Enter your username" required>
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" [(ngModel)]="credentials.password" placeholder="Enter your password" required>
+    </div>
+
+    <button (click)="login()" class="login-button">Submit</button>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
+</div>
