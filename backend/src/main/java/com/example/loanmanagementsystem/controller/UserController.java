@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.controller;
 
+import com.example.loanmanagementsystem.model.LoginResponse;
 import com.example.loanmanagementsystem.model.User;
 import com.example.loanmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody User user) {
         User foundUser = userService.findByUsername(user.getUsername());
         if (foundUser != null && userService.passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
-            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponse("Login successful", null), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new LoginResponse("Invalid credentials", "AUTH_001"), HttpStatus.UNAUTHORIZED);
         }
     }
 }

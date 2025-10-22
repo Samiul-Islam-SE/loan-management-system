@@ -9,6 +9,7 @@ target/
 /.classpath
 /.mvn/wrapper/maven-wrapper.jar
 .mvn/wrapper/maven-wrapper.jar
+backend/.idea/
 
 # ---- Node / Angular ----
 frontend/node_modules/
