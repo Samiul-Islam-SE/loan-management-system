@@ -1,0 +1,25 @@
+# ---- Java / Spring Boot ----
+target/
+*.log
+*.iml
+*.class
+/.idea/
+/.project
+/.settings/
+/.classpath
+/.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
+
+# ---- Node / Angular ----
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+.angular/cache/
+
+# ---- OS / Editors ----
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
