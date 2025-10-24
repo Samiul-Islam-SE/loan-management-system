@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  credentials = { username: '', password: '' };
+  credentials = { email: '', password: '' };
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { } // Inject Router
