@@ -23,8 +23,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody User user) {
-        User foundUser = userService.findByUsername(user.getUsername());
-        if (foundUser != null && userService.passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+        User foundUser = userService.findByEmail(user.getEmail());
+        if (foundUser != null && userService.passwordEncoder.matches(user.getPasswordHash(), foundUser.getPasswordHash())) {
             return new ResponseEntity<>(new LoginResponse("Login successful", null), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new LoginResponse("Invalid credentials", "AUTH_001"), HttpStatus.UNAUTHORIZED);
