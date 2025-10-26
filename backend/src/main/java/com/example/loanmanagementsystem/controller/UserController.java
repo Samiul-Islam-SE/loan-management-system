@@ -30,13 +30,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequestDTO loginRequestDTO) {
+    public @ResponseBody LoginResponse loginUser(@RequestBody LoginRequestDTO loginRequestDTO) {
         User foundUser = userService.findByEmail(loginRequestDTO.getEmail());
-        if (foundUser != null && userService.passwordEncoder.matches(loginRequestDTO.getPassword(), foundUser.getPasswordHash())) {
-            List<Loan> loans = loanService.getUserLoans(foundUser);
-            return new ResponseEntity<>(new LoginResponse(foundUser, loans), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new LoginResponse("Invalid credentials", "AUTH_001"), HttpStatus.UNAUTHORIZED);
+        LoginResponse resp = null;
+        try {
+            if (foundUser != null && userService.passwordEncoder.matches(loginRequestDTO.getPassword(), foundUser.getPasswordHash())) {
+                List<Loan> loans = loanService.getUserLoans(foundUser);
+                resp = new LoginResponse(foundUser, loans);
+            }
+        } catch (Exception ex) {
+            resp = new LoginResponse(ex.getMessage(), "500");
         }
+        return resp;
     }
 }

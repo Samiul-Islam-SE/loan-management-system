@@ -7,6 +7,6 @@
  * Corresponds to the data sent to the backend for authentication.
  */
 export interface LoginCredentials {
-  email: string | null;
-  password: string | null;
+  email?: string | null;
+  password?: string | null;
 }

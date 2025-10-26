@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { UserProfile } from '../model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterOutlet],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  user: UserProfile | null = null;
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit(): void {
+    this.user = this.authService.getCurrentUser();
+  }
   logout(): void {
+    this.authService.logout();
     console.log('User logged out');
     this.router.navigate(['/login']);
   }
