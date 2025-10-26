@@ -52,6 +52,12 @@ public class Loan {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    @Column(name = "borrower_email", insertable = false, updatable = false)
+    private String borrowerEmail;
+
+    @Column(name = "lender_email", insertable = false, updatable = false)
+    private String lenderEmail;
+
     // Getters and Setters
 
     public UUID getId() {
@@ -140,5 +146,21 @@ public class Loan {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getBorrowerEmail() {
+        return borrowerEmail;
+    }
+
+    public void setBorrowerEmail(String borrowerEmail) {
+        this.borrowerEmail = borrowerEmail;
+    }
+
+    public String getLenderEmail() {
+        return lenderEmail;
+    }
+
+    public void setLenderEmail(String lenderEmail) {
+        this.lenderEmail = lenderEmail;
     }
 }
