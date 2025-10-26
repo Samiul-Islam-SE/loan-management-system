@@ -1,29 +1,28 @@
 /**
  * @file Defines the Loan interface, representing a single loan entity.
+ * This model is aligned with the backend's `Loan.java` entity.
  */
-
-import { Payment } from './';
 
 /**
  * Defines the possible statuses a loan can have.
+ * This corresponds to the `LoanStatus.java` enum on the backend.
  */
-export type LoanStatus = 'Pending' | 'Approved' | 'Active' | 'Rejected' | 'Paid Off' | 'Defaulted';
+export type LoanStatus = 'OPEN' | 'OVERDUE' | 'RESOLVED' | 'CANCELLED';
 
 /**
  * Interface for a loan object.
  * This corresponds to the main loan entity in the backend.
  */
 export interface Loan {
-  id: string | null; // Unique identifier for the loan
-  borrowerId: string | null; // Foreign key to the UserProfile
-  loanType: string | null; // e.g., 'Personal', 'Home', 'Auto'
-  amount: number | null; // The principal amount of the loan
-  interestRate: number | null; // Annual interest rate (e.g., 5.5 for 5.5%)
-  termMonths: number | null; // The total duration of the loan in months
-  startDate: string | null; // ISO 8601 date string when the loan was disbursed
+  id: string | null;
+  principalCents: number | null;
+  currencyCode: string | null;
+  title: string | null;
+  note: string | null;
+  promisedDueDate: string | null; // ISO 8601 date string
   status: LoanStatus | null;
-  outstandingBalance: number | null; // The remaining amount to be paid
-  nextPaymentDate?: string | null; // ISO 8601 date string for the next due payment
-  monthlyPayment: number | null; // The calculated monthly installment amount
-  paymentHistory?: Payment[] | null; // An array of past payments, might be loaded on demand
+  createdAt: string | null; // ISO 8601 date string
+  updatedAt: string | null; // ISO 8601 date string
+  borrowerEmail?: string | null;
+  lenderEmail?: string | null;
 }

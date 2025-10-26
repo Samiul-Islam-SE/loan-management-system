@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable, map, tap } from 'rxjs';
 import { Loan, LoginCredentials, LoginResponse, UserProfile } from './model';
 import { environment } from './environment';
 
@@ -16,24 +16,29 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(credentials: LoginCredentials): Observable<LoginResponse> {
-    return this.http
-      .post<LoginResponse>(`${this.apiUrl}/users/login`, credentials)
-      .pipe(
-        tap((response) => {
-          if (response) {
-            this.storeAuthData( response.user, response.loans);
-          }
-        })
-      );
+    // We need to observe the full response to get headers
+    return this.http.post<LoginResponse>(`${this.apiUrl}/users/login`, credentials, { observe: 'response' }).pipe(
+      tap((response) => {
+        const token = response.headers.get('Authorization');
+        const body = response.body;
+        if (token && body) {
+          this.storeAuthData(token, body.user, body.loans);
+        }
+      }),
+      // Map the full HttpResponse back to just its body for the component subscriber
+      map((response: HttpResponse<LoginResponse>) => response.body as LoginResponse)
+    );
   }
 
   logout(): void {
     // Clear token and user info from local storage
+    localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.LOANS_KEY);
   }
 
-  private storeAuthData( user?: UserProfile, loans?: Loan[]): void {
+  private storeAuthData(token: string, user?: UserProfile, loans?: Loan[]): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     localStorage.setItem(this.LOANS_KEY, JSON.stringify(loans));
   }

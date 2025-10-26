@@ -110,3 +110,24 @@
 .logout-button:hover {
   background-color: #c0392b;
 }
+
+/* Angular Material Table Container */
+.loan-table-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Status Badge Styles */
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+.status-badge.approved { background-color: #27ae60; }
+.status-badge.pending { background-color: #f39c12; }
+.status-badge.rejected { background-color: #e74c3c; }
+.status-badge.paid { background-color: #3498db; }
